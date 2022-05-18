@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>testestt 3 | Registration Page</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <h1>이벤트 목록</h1>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>이름</th>
+      <th>index 내용</th>
+    </tr>
+    <tr th:each="file , index: ${fileList}">
+      <td>
+        <input type="checkbox" name="chk" th:id="chk+${index.index}" th:value="${file.getName()}">
+      </td>
+      <td th:text="${file.getName()}">파일 이름</td>
+      <td th:text="${index}">index</td>
+    </tr>
+  </table>
+  <button type="button" id="button" th:onclick="|pdfDownloads()|">
+    <img src="">PDF
+  </button>
+</div>
+<script  th:inline="javascript">
+  /*<![CDATA[*/
+  function pdfDownloads() {
+    var checkedList = [];
+    for (const item of document.querySelectorAll("input[name='chk']:checked")) {
+      checkedList.push(item.value);
+    }
+    location.href="/fileLsit/" + checkedList;
+  }
+  /*]]>*/
+</script>
+
+</body>
+</html>
